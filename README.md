@@ -94,11 +94,16 @@ The files are organized to mirror the actions requested in the Jira task:
 ### Shared QA infrastructure
 
 - Allure/TestOps base URL: `https://larixon.testops.cloud`
-- Default project reference found in `tester-skills-mcp`: `project/135`
+- Confirmed TestOps launch pages for this workflow:
+  - `https://larixon.testops.cloud/project/168/launches`
+  - `https://larixon.testops.cloud/project/69/launches`
 - Confluence sources confirm:
   - Android builds are in Bamboo
   - iOS builds are often assembled manually or via Fastlane in current accessible process docs
   - BrowserStack was selected in a PoC, but credentials are not available in current sources
+- Owner clarification:
+  - TestRail is not needed for this workflow
+  - use the confirmed TestOps projects above as the primary reporting path
 - Slack clarification from `2026-04-01`:
   - tester roles are not expected to start Bamboo jobs directly
   - CI and build execution should stay in the existing automated or devops-controlled flow
@@ -131,8 +136,8 @@ Command:
 Current expected result:
 
 - `FAIL: 0`
-- `WARN: 2`
-- The remaining warnings are the still-unconfirmed `larixon.testrail.io` mention and exact UI `plan key` in `integ-tester/add/200-larixon-test-devices.md`
+- `WARN: 1`
+- The remaining warning is the still-unconfirmed exact UI `plan key` in `integ-tester/add/200-larixon-test-devices.md`
 
 ## Sources
 

@@ -69,13 +69,15 @@ Add a smaller-screen device if the task changes dense layouts, tab bars, badges,
 ### Test management and reporting
 
 - Allure/TestOps base URL: `https://larixon.testops.cloud`
-- Default project reference found in current tooling: `project/135`
+- Confirmed TestOps launch pages for this workflow:
+  - `https://larixon.testops.cloud/project/168/launches`
+  - `https://larixon.testops.cloud/project/69/launches`
 - Android UI tests already expose Allure metadata such as:
   - `AllureId`
   - `Epic`
   - `Feature`
   - `Story`
-- Legacy docs may still mention TestRail. Treat it as a legacy reference unless the current task explicitly uses it.
+- Do not route this workflow through TestRail. Use the confirmed TestOps projects above as the primary reporting entry points.
 
 ### Execution commands
 

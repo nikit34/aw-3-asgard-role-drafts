@@ -43,8 +43,15 @@ COMPLETENESS_HINTS = {
         "warn": ["ja", "pn", "sl"],
     },
     "integ-tester/add/200-larixon-test-devices.md": {
-        "required": ["stand1.dev.larixon.com", "connectedtjdebugandroidtest", "allure/testops", "browserstack"],
-        "warn": ["larixon.testrail.io", "plan key"],
+        "required": [
+            "stand1.dev.larixon.com",
+            "connectedtjdebugandroidtest",
+            "allure/testops",
+            "browserstack",
+            "project/168/launches",
+            "project/69/launches",
+        ],
+        "warn": ["plan key"],
     },
     "integ-tester/extend/036-accessibility-tests.md": {
         "required": ["left-to-right", "48dp"],
