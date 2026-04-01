@@ -114,6 +114,26 @@ The files are organized to mirror the actions requested in the Jira task:
 - Exact Bamboo plan keys can be added later as handoff metadata, but they are not required for the base tester-role behavior clarified in Slack
 - Final ASGARD composed preview cannot be checked until someone uploads these overrides with `write:roles`
 
+## Validation
+
+Run the local validator to check:
+
+- required AW-3 files exist
+- each markdown file stays within the requested size budget
+- README local source paths still resolve
+- obvious contradictions do not appear around Bamboo, BrowserStack, Playwright, or removed pilot residue
+- basic completeness hints from the Jira task are still present
+
+Command:
+
+- `./scripts/validate_aw3.py`
+
+Current expected result:
+
+- `FAIL: 0`
+- `WARN: 2`
+- The remaining warnings are the still-unconfirmed `larixon.testrail.io` mention and exact UI `plan key` in `integ-tester/add/200-larixon-test-devices.md`
+
 ## Sources
 
 ### Jira
