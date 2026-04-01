@@ -24,7 +24,7 @@ Use this slot for Android/KMP use cases and for the nearest iOS business-command
 - If object construction itself is invalid, test that validation explicitly
 - If the use case is a pass-through wrapper with no business behavior, say so and avoid pretending there is meaningful logic
 
-### Review-domain hints for MOB-617-adjacent work
+### Review-domain hints for review-feature work
 
 For review features, use case tests should typically cover:
 

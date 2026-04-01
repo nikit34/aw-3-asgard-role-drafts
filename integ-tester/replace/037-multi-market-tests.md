@@ -32,7 +32,7 @@ Replace any platform-level assumptions about other market sets. Larixon mobile c
 
 ### Review-feature expectations
 
-For review-related work such as `MOB-617`, verify across multiple markets:
+For review-related work, verify across multiple markets:
 
 - badge counter visibility and hidden state
 - pending vs completed filter counts

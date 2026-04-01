@@ -17,7 +17,7 @@ Use this slot for Android/KMP repositories and for the closest iOS data-layer eq
 - `app/src/test/kotlin/tj/somon/somontj/model/repository/categories/RemoteCategoryRepositoryTest.kt`
 - `app/src/test/kotlin/tj/somon/somontj/domain/favorites/searches/RemoteSearchRepositoryTest.kt`
 
-### Review-domain examples useful for AW-3 and MOB-617
+### Review-domain examples useful for AW-3
 
 - `feature-advert-reviews/data/src/commonTest/kotlin/com/larixon/advertreviews/data/remote/mapper/AdvertReviewsMapperTest.kt`
 

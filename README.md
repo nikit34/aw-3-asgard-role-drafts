@@ -119,7 +119,6 @@ The files are organized to mirror the actions requested in the Jira task:
 ### Jira
 
 - `AW-3`: `https://larixon.atlassian.net/browse/AW-3`
-- `MOB-617`: `https://larixon.atlassian.net/browse/MOB-617`
 
 ### Confluence
 
@@ -153,7 +152,3 @@ The files are organized to mirror the actions requested in the Jira task:
 - `/Users/permi/classifieds-ios-app/Larixon/Jacars/AppCustomization.swift`
 - `/Users/permi/classifieds-ios-app/Larixon/Pin.tt/AppCustomization.swift`
 - `/Users/permi/classifieds-ios-app/Larixon/Salanto/AppCustomization.swift`
-
-## Pilot usage
-
-See `mob-617/pilot-brief.md` for the first validation task prepared against `MOB-617`.
