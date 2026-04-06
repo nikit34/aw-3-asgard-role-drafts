@@ -66,14 +66,14 @@ The files are organized to mirror the actions requested in the Jira task:
 
 | Slot | Action | Reason |
 | --- | --- | --- |
-| `013-test-architect-input.md` | add | Bridge to test-architect downstream guidance: scenario IDs, coverage targets, risk map, test data |
-| `200-larixon-web-infra.md` | add | Larixon web/backend infra, repo, CI, TestOps, local execution, test stack |
+| `013-test-architect-input.md` | add | Bridge to test-architect downstream guidance: scenario IDs, coverage targets, risk map |
+| `033-viewmodel-tests.md` | add | Django view/DRF viewset/API endpoint tests (no platform slot, added between 032 and 040) |
+| `200-larixon-web-infra.md` | add | Larixon web/backend infra, repo, CI, TestOps, local execution, test stack, conftest example |
 | `011-test-style.md` | replace | Python/pytest/Django test style instead of generic platform pattern |
-| `020-coverage.md` | replace | pytest-cov coverage expectations with Django layer-specific floors |
-| `031-repository-tests.md` | replace | Django model/manager/queryset tests (repository-equivalent layer) |
-| `032-usecase-tests.md` | replace | Service/business logic/management command tests |
-| `033-viewmodel-tests.md` | replace | Django view/DRF viewset/API endpoint tests (view-equivalent layer) |
-| `034-mapper-tests.md` | replace | DRF serializer/mapper/formatter tests |
+| `020-coverage.md` | replace | pytest-cov coverage expectations with Django layer-specific floors, --cov-fail-under |
+| `031-service-tests.md` | replace | Service/business logic/management command tests (was 032-usecase-tests) |
+| `032-serializer-tests.md` | replace | DRF serializer/mapper/formatter tests (was 034-mapper-tests) |
+| `033-model-tests.md` | replace | Django model/manager/queryset tests (was 031-repository-tests) |
 
 ### Backend Integration Tester
 

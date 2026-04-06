@@ -38,6 +38,22 @@ View tests at the unit level focus on response correctness with controlled DB st
 ### Anti-patterns
 
 - asserting only status 200 without checking response body
-- testing the same serializer output that is already tested in `034-serializer-tests`
+- testing the same serializer output that is already tested in `032-serializer-tests`
 - skipping permission tests for authenticated-only endpoints
 - using `json.loads(response.content)` when `response.data` or `response.json()` is available
+
+Example (DRF viewset + XML endpoint):
+
+```python
+class TestFacebookFeedView(APITestCase):
+    def test_returns_valid_xml(self):
+        response = self.client.get("/api/v2/feeds/property/facebook/")
+        self.assertEqual(response.status_code, 200)
+        root = ET.fromstring(response.content)
+        self.assertIsNotNone(root.find(".//listing"))
+
+    def test_unauthenticated_returns_403(self):
+        self.client.logout()
+        response = self.client.get("/api/v2/feeds/property/facebook/")
+        self.assertEqual(response.status_code, 403)
+```

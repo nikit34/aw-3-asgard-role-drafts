@@ -23,6 +23,7 @@ These are working engineering targets, not a license to write shallow tests. Beh
 ### Coverage workflow
 
 - Run with coverage: `python -m pytest --cov={app} --cov-report=html`
+- Fail-below-threshold: `python -m pytest --cov={app} --cov-fail-under=80`
 - Check specific module: `python -m pytest --cov={app}.{module} adverts/tests/test_{module}.py`
 - The `htmlcov/index.html` report shows line-by-line coverage
 - If CI publishes a coverage artifact, report the actual URL. Do not fabricate one.

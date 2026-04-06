@@ -37,6 +37,15 @@ This role covers Larixon backend/web work. The primary codebase is a Django/DRF 
 - Factories and fixtures are typically co-located with tests or in a shared `factories.py` / `conftest.py`
 - Use `pytest` fixtures and factory helpers (model_bakery or factory_boy — follow what the repo uses)
 
+Example conftest.py:
+
+```python
+# adverts/tests/conftest.py
+@pytest.fixture
+def active_advert(db):
+    return baker.make("adverts.Advert", is_active=True)
+```
+
 ### Test stack
 
 - `pytest` with `pytest-django`

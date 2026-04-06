@@ -22,7 +22,24 @@ Use this slot for Django models, managers, custom querysets, and any data-access
 
 - Do not test Django ORM internals (e.g. that `filter()` works)
 - Do not test auto-generated admin or migration files
-- Do not re-test serializer output here — that belongs in `034-serializer-tests`
+- Do not re-test serializer output here — that belongs in `032-serializer-tests`
+
+Example (pure unit + DB-backed):
+
+```python
+class TestAdvertModel:
+    def test_is_expired_returns_true_past_deadline(self):
+        advert = Advert()
+        advert.deadline = timezone.now() - timedelta(days=1)
+        assert advert.is_expired() is True
+
+@pytest.mark.django_db
+class TestAdvertManager:
+    def test_active_returns_only_active(self):
+        baker.make("adverts.Advert", is_active=True)
+        baker.make("adverts.Advert", is_active=False)
+        assert Advert.objects.active().count() == 1
+```
 
 ### Fixture rules
 

@@ -27,13 +27,6 @@ Follow the dominant style of the touched app/module. Larixon web/core is a Djang
 - For DRF: `response.status_code`, `response.data`, `response.json()`
 - For XML: `ET.fromstring()` with `find()` / `findall()` assertions
 
-### Factories and fixtures
-
-- Use the factory library already present in the repo (model_bakery or factory_boy)
-- Prefer `conftest.py` fixtures for shared setup within an app's test directory
-- Build the smallest meaningful object — inline only fields relevant to the test
-- Use real domain names and values from the task, not generic placeholders
-
 ### Mandatory writing rules
 
 - One test = one behavior or one closely related branch

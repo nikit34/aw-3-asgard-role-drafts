@@ -21,9 +21,26 @@ Mandatory when task changes: API contracts, serializer fields, response shapes, 
 
 ### Real project patterns
 
+Examples from existing codebase (adapt to your task):
+
 - `FacebookFeedAutoSerializer`: added `availability`, fixed `transmission` case
 - `FacebookFeedXMLRenderer._to_xml`: structural rendering logic with `attrs` key detection
 - Response serializers for API v2 endpoints: field presence, optional fields, nested objects
+
+Example:
+
+```python
+class TestFacebookFeedAutoSerializer:
+    def test_serializes_availability_field(self):
+        advert = baker.prepare("adverts.Advert", availability="in stock")
+        serializer = FacebookFeedAutoSerializer(advert)
+        assert serializer.data["availability"] == "in stock"
+
+    def test_null_optional_field_excluded(self):
+        advert = baker.prepare("adverts.Advert", transmission=None)
+        serializer = FacebookFeedAutoSerializer(advert)
+        assert "transmission" not in serializer.data
+```
 
 ### Writing rules
 

@@ -25,13 +25,10 @@ When test-architect artifacts exist, they override your own planning:
 
 | Aspect | Without test-architect | With test-architect |
 |--------|----------------------|---------------------|
-| Which modules to test | You decide from changed code | Use "Unit Tester Guidance" section from test-strategy.md |
 | Scenario list | You derive from feature scope | Use assigned scenario IDs from test-matrix.md (your rows have `Test Level = Unit`) |
 | Coverage targets | Default floors from `020-coverage.md` | Use per-module targets from coverage-targets.md |
 | Risk-based depth | You assess yourself | Use risk levels from risk-map.md — HIGH = exhaustive, MEDIUM = targeted, LOW = minimal |
-| Test data shapes | You create from code and API contracts | Use fixture definitions from test-data-strategy.md |
-| Negative scenarios | You identify yourself | Use T-Nxx rows from test-matrix.md for HIGH-risk areas |
-| Multi-market cases | You identify from settings | Use market-specific rows from test-matrix.md |
+| What NOT to test | Implicit | Use explicit "out of scope for Unit Tester" boundaries from test-strategy.md |
 
 ### Traceability
 
