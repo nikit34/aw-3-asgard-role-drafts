@@ -25,11 +25,41 @@ Use this slot for Android `ViewModel` tests and for the closest iOS presentation
 - Verify navigation and analytics only when they are triggered by observable behavior
 - Keep `SavedStateHandle` explicit when the screen depends on persisted state
 
+Turbine example with dispatcher setup:
+
+```kotlin
+class RatingViewModelTest : DescribeSpec({
+    val testDispatcher = UnconfinedTestDispatcher()
+    beforeSpec { Dispatchers.setMain(testDispatcher) }
+    afterSpec { Dispatchers.resetMain() }
+
+    describe("selecting rating") {
+        it("updates state with selected value") {
+            vm.state.test {
+                awaitItem().selectedRating shouldBe null
+                vm.onEvent(RatingEvent.SelectRating(4))
+                awaitItem().selectedRating shouldBe 4
+                cancelAndIgnoreRemainingEvents()
+            }
+        }
+    }
+})
+```
+
 ### iOS rules
 
 - Test the presentation object, not the rendered view tree
 - Assert output state, commands, or callbacks
 - If the module is MVP, map this slot to the presenter or coordinator that owns the state transition
+
+```swift
+func testLoadingStateTransition() {
+    sut.loadReviews()
+    XCTAssertTrue(sut.isLoading)
+    waitForExpectations(timeout: 1)
+    XCTAssertFalse(sut.isLoading)
+}
+```
 
 ### Review-domain behaviors worth testing
 

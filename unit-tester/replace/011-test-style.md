@@ -16,6 +16,23 @@ Larixon is mixed. Follow the dominant style of the touched module instead of for
   - `Turbine`
 - Use sentence-style `it("...")` inside Kotest specs.
 - Use `action_condition_expectedResult` naming in JUnit-style classes when the file already follows that convention.
+
+Minimal Kotest example (dominant style in feature modules):
+
+```kotlin
+class ReviewConfigMapperTest : DescribeSpec({
+    describe("map") {
+        it("maps rating to domain model") {
+            val result = mapper.map(dto)
+            result.rating shouldBe 4
+        }
+        it("returns null when rating is absent") {
+            val result = mapper.map(dtoWithoutRating)
+            result.rating shouldBe null
+        }
+    }
+})
+```
 - Assert behavior, state, and important collaboration. Do not assert implementation noise.
 - When coroutines or flows are involved, use the test dispatcher and `Turbine` instead of sleeps.
 
@@ -25,6 +42,16 @@ Larixon is mixed. Follow the dominant style of the touched module instead of for
 - Use `Quick` and `Nimble` only where the current target already uses them.
 - Do not convert an existing XCTest-only test file to Quick just to add one more case.
 - Keep one assertion vocabulary per file.
+
+Minimal XCTestCase example:
+
+```swift
+func testAuthorizationReturnsToken() {
+    let result = sut.authorize(credentials: validCredentials)
+    XCTAssertNotNil(result.token)
+    XCTAssertEqual(result.expiresIn, 3600)
+}
+```
 
 ### Assertions and doubles
 

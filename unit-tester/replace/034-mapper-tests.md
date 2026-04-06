@@ -20,7 +20,7 @@ Mapper tests are mandatory when the task changes API contracts, DTO shape, pagin
 
 ### Review-domain expectations
 
-For review list and review configuration payloads, test at least:
+Example for review payloads (adapt to your task domain). For review list and review configuration payloads, test at least:
 
 - pending and completed review card fields
 - null rating vs numeric rating

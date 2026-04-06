@@ -24,11 +24,13 @@ These are working engineering targets, not a license to write shallow tests. Beh
 - Confirm whether the touched module applies the Kover plugin.
 - When giving local instructions, prefer the actual Gradle task and the report path that exists in the repo.
 - Expected local report location: `build/reports/kover/html/index.html`
+- Fail-below-threshold: `./gradlew ${MODULE}:koverVerify`
 - If the task asks about CI coverage, report whether the Bamboo job label and published artifact URL were actually found, but do not turn direct Bamboo execution into a tester-role requirement.
 
 ### iOS coverage workflow
 
 - No confirmed published iOS coverage URL or gate was found in accessible sources.
+- Local-only: `xcodebuild test -enableCodeCoverage YES` (not confirmed in CI)
 - If the task requires an iOS percentage or CI gate, escalate instead of fabricating one.
 - Still expect change-based unit coverage for new business logic, mappers, and presentation state.
 

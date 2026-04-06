@@ -28,6 +28,28 @@ Even when a review list module is mapper-heavy, still test the contract at the d
 - null rating vs non-null rating
 - optional controls like bottom actions
 
+Compact example (success + error on review domain):
+
+```kotlin
+class AdvertReviewsRepositoryTest : DescribeSpec({
+    val api = mockk<ReviewsApi>()
+    val repo = AdvertReviewsRepository(api)
+
+    describe("getReviews") {
+        it("returns page with count and next URL") {
+            coEvery { api.getReviews(any()) } returns reviewsPageDto(count = 12, next = "/page/2")
+            val result = repo.getReviews(advertId)
+            result.count shouldBe 12
+            result.nextUrl shouldBe "/page/2"
+        }
+        it("throws domain error on network failure") {
+            coEvery { api.getReviews(any()) } throws IOException("timeout")
+            shouldThrow<ReviewsFetchException> { repo.getReviews(advertId) }
+        }
+    }
+})
+```
+
 ### iOS mapping rule
 
 If iOS code has no explicit `Repository` abstraction, map this slot to the class that owns the same boundary:
