@@ -47,19 +47,32 @@ Always name the exact stand when specifying test prerequisites:
 - Test with authenticated and unauthenticated users
 - Test filter, ordering, and limit parameters
 
+Example (XML feed endpoint):
+
+```python
+class TestFacebookFeedXML(APITestCase):
+    def test_feed_returns_valid_xml_with_listings(self):
+        baker.make("adverts.Advert", is_active=True, _quantity=3)
+        response = self.client.get("/api/v2/feeds/property/facebook/")
+        self.assertEqual(response.status_code, 200)
+        root = ET.fromstring(response.content)
+        listings = root.findall(".//listing")
+        self.assertEqual(len(listings), 3)
+
+    def test_feed_returns_404_for_unknown_type(self):
+        response = self.client.get("/api/v2/feeds/unknown/facebook/")
+        self.assertEqual(response.status_code, 404)
+```
+
 ### Real project examples
 
-From the Facebook feeds feature (CD-4651):
-
-- `FacebookFeedXMLStructureTest`: tests XML validity, listing count, nested element structure
-- `FacebookFeedListTest`: tests condition filters, limit_adverts, limit_description, 404 response
-- Parametrized across feed types (property, auto)
+- `adverts/tests/views/feeds/tests_common.py` — XML structure, filter conditions, pagination
 
 ### Reporting rule
 
 Every integration result must include:
 
-- endpoint(s) tested
-- HTTP method(s)
-- test run link or artifact path
-- whether CI metadata or coverage URL is confirmed or still requires escalation
+- endpoint(s) and HTTP method(s) tested
+- stand URL (if tested against running instance)
+- test run artifact path
+- factories/fixtures created

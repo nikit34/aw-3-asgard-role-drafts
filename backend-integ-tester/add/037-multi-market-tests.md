@@ -29,9 +29,22 @@ Replace any platform-level assumptions about other market sets. Larixon web curr
 
 ### Django settings per market
 
-- Market-specific configuration lives in settings files (e.g. `bazaraki.py`, `somon.py`)
+- Market-specific configuration lives in settings files: `config/settings/{market}.py`
 - Use `@override_settings` to switch market context in tests when needed
 - For feed tests: market affects `COUNTRY`, locale, currency, and feature flags
+
+Stands and environments: see `200-larixon-web-infra.md`
+
+Example:
+
+```python
+from django.test import override_settings
+
+@override_settings(COUNTRY="CY", LANGUAGE_CODE="en", CURRENCY="EUR")
+class TestBazarakiFeed(APITestCase):
+    def test_feed_uses_eur_currency(self):
+        ...
+```
 
 ### Reporting rule
 

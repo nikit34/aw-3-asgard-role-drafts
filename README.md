@@ -81,8 +81,9 @@ The files are organized to mirror the actions requested in the Jira task:
 | Slot | Action | Reason |
 | --- | --- | --- |
 | `013-test-architect-input.md` | add | Bridge to test-architect downstream guidance: scenario IDs, endpoint assignments |
-| `200-larixon-web-infra.md` | add | Web integration infra, environments, stands, TestOps, execution commands |
-| `037-multi-market-tests.md` | replace | Platform copy not aligned with Larixon web markets and Django settings |
+| `037-multi-market-tests.md` | add | Larixon web markets, Django settings, @override_settings snippet (manifest has no slot 037) |
+| `200-larixon-web-infra.md` | add | Web integration infra, environments, stands, TestOps, execution commands, API snippet |
+| `033-factories-fixtures.md` | extend | model_bakery convention, shared fixture locations, writing rules |
 
 ### Backend E2E Tester
 

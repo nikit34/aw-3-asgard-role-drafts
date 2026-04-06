@@ -25,11 +25,9 @@ When test-architect artifacts exist, they override your own planning:
 
 | Aspect | Without test-architect | With test-architect |
 |--------|----------------------|---------------------|
-| Which endpoints/flows to test | You decide from changed code | Use "Integration Tester Guidance" section from test-strategy.md |
 | Scenario list | You derive from API spec | Use assigned scenario IDs from test-matrix.md (your rows have `Test Level = Integration`) |
 | Coverage scope | All endpoints touched by the change | Use risk-map.md — HIGH = exhaustive, MEDIUM = happy + error, LOW = smoke only |
 | Test data setup | You create from models and fixtures | Use fixture definitions from test-data-strategy.md |
-| Multi-market matrix | You identify from settings | Use market-specific rows from test-matrix.md |
 | What NOT to test | Implicit | Use explicit "out of scope for Integration Tester" boundaries from test-strategy.md |
 
 ### Traceability
