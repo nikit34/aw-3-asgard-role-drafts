@@ -61,6 +61,7 @@ The files are organized to mirror the actions requested in the Jira task:
 | Slot | Action | Reason |
 | --- | --- | --- |
 | `200-larixon-web-td.md` | add | TD workflow rules, web infra, tester-skills-mcp integration, markets, environments, output artifacts |
+| `070-checklist.md` | extend | Larixon-specific TD checklist: Confluence publish, Allure sync, role assignments, mcp parsing |
 
 ### Backend Unit Tester
 

@@ -16,7 +16,7 @@ When producing a test strategy and test matrix, assign each scenario to exactly 
 | --- | --- | --- |
 | Unit BE | Single class/function in isolation: models, managers, querysets, services, serializers, utils | `backend-unit-tester` |
 | Integration | API endpoint through Django test client with real DB, full request/response cycle | `backend-integ-tester` |
-| E2E UI | Browser-level user flow via Playwright against a running stand | `backend-e2e-tester` |
+| E2E UI | Browser-level user flow via Playwright against a running stand | `e2e-tester` |
 
 Do not duplicate the same assertion across layers. If an integration test already proves a serializer field, do not add a unit test that only re-checks the same field.
 
@@ -31,11 +31,13 @@ Produce test design as a Confluence page following the team rules:
 5. **Test cases by layer**: each case has:
    - `[x]` / `[ ]` coverage checkbox
    - Unique ID (e.g. 1.1, 2.3)
-   - Реализован: test class and method name (when implemented)
+   - Реализован: (filled by downstream tester after implementation — leave empty in TD)
    - Задача / Предусловия / Действие / Ожидаемый результат
    - Priority, Layer, Type (manual / auto-candidate)
 
 Test cases must be in a markdown table or structured list with a `Name` column — this is required for downstream parsing by `tester-skills-mcp`.
+
+TD folder: [TDs 2026](https://larixon.atlassian.net/wiki/spaces/itdep/folder/4091674628)
 
 ### TD workflow with tester-skills-mcp
 
@@ -46,7 +48,7 @@ The team uses `tester-skills-mcp` for TD generation and publication:
 - **TD publication**: in a separate chat, use `action_td_publish` or `build_td_publish_prompt`
 - **Allure sync**: `action_td_allure_sync` or `build_td_allure_sync_prompt` to create test cases in Allure TestOps
 
-Generation and publication must happen in separate chats to avoid context exhaustion.
+Generation and publication must happen in separate chats — TD generation consumes most of the context window reading code, leaving insufficient room for the publication API call.
 
 ### Prioritization rules
 
@@ -77,6 +79,7 @@ Apply techniques based on feature logic:
 - If the branch is not specified, ask before analyzing
 - Identify: changed files, new endpoints, modified serializers, changed models, affected tests
 - Reference code paths precisely: `module/path.py:line_number` — method or class name
+- Example: `adverts/views/feeds/renderers.py:42` — `FacebookFeedXMLRenderer._to_xml()`
 
 ### Allure TestOps
 
