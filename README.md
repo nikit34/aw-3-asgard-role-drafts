@@ -86,9 +86,10 @@ The files are organized to mirror the actions requested in the Jira task:
 
 | Slot | Action | Reason |
 | --- | --- | --- |
+| `011-test-style.md` | add | Playwright/pytest test style, POM patterns, locator strategy (manifest has no slot 011, inserted between 010 and 012) |
 | `013-test-architect-input.md` | add | Bridge to test-architect downstream guidance: scenario IDs, flow assignments |
-| `200-larixon-web-e2e-infra.md` | add | Playwright infra, tester-skills-mcp integration, stands, TestOps, multi-market E2E |
-| `011-test-style.md` | replace | Playwright/pytest test style, POM patterns, locator strategy |
+| `200-larixon-web-e2e-infra.md` | add | tester-skills-mcp integration, Allure TestOps, multi-market E2E, reporting rule |
+| `020-e2e-infrastructure.md` | replace | Larixon-specific Playwright infra, repo, stands, environments, CI, local execution |
 
 ## Confirmed inputs used for the drafts
 
