@@ -30,32 +30,25 @@ Replace any platform-level assumptions about other market sets. Larixon mobile c
 - `tj`, `ja`, `pn`:
   - validate localized labels, formatting, and navigation text instead of assuming one English fallback
 
-### Review-feature expectations
+### Market switching example
 
-For review-related work, verify across multiple markets:
-
-- badge counter visibility and hidden state
-- pending vs completed filter counts
-- pending card actions:
-  - rate
-  - mark as no-deal
-  - hide
-- completed review rendering:
-  - rating
-  - tags
-  - optional comment
-- deep link opening:
-  - `lc://profile/reviews`
-- advert title/context click-through
-- pagination
-- empty state text and layout
+```kotlin
+// MockWebServer market config
+server.dispatcher = object : Dispatcher() {
+    override fun dispatch(request: RecordedRequest) = when {
+        request.path?.contains("/config") == true ->
+            MockResponses.success("config_bz.json")
+        else -> MockResponses.error(404)
+    }
+}
+```
 
 ### Platform mapping rule
 
 - Android:
-  - use real flavors from Gradle
+  - use real flavors from Gradle: `./gradlew connectedBzDebugAndroidTest` / `connectedTjDebugAndroidTest`
 - iOS:
-  - use real market target and `AppCustomization` values
+  - use real market target and `AppCustomization` values: `-scheme Bazaraki` / `-scheme Somon.tj`
 - If one platform is not in scope for the current sprint, say that clearly and avoid pretending the validation was cross-platform
 
 ### Reporting rule

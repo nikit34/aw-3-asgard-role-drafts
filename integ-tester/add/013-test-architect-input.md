@@ -25,13 +25,9 @@ When test-architect artifacts exist, they override your own planning:
 
 | Aspect | Without test-architect | With test-architect |
 |--------|----------------------|---------------------|
-| Which screens/flows to test | You decide from ui-contracts.md | Use "Integration Tester Guidance" section from test-strategy.md |
 | Scenario list | You derive from UX spec | Use assigned scenario IDs from test-matrix.md (your rows have `Test Level = Integration`) |
 | Screen state coverage | All 5 states for every screen | Use risk-map.md — HIGH = 5/5 states, MEDIUM = 3/5 (Success, Error, Loading) |
 | MockWebServer setup | You create from API contracts | Use JSON response definitions from test-data-strategy.md — file names, error codes, pagination shapes |
-| Multi-market matrix | You identify from locale config | Use market-specific rows from test-matrix.md |
-| Accessibility focus | All interactive elements | Use a11y guidance from test-strategy.md — specific elements and screens flagged |
-| Navigation paths | You derive from navigation graph | Use navigation scenarios from test-matrix.md |
 | What NOT to test | Implicit | Use explicit "out of scope for Integration Tester" boundaries from test-strategy.md |
 
 ### Traceability

@@ -6,21 +6,7 @@ Always name the exact stand and build you are testing. `dev` is not enough.
 
 ### Shared stands
 
-The accessible mobile sources confirm shared stands such as:
-
-- `stand1.dev.larixon.com`
-- `stand2.dev.larixon.com`
-- `stand3.dev.larixon.com`
-- `stand4.dev.larixon.com`
-- `stand5.dev.larixon.com`
-- `stand6.dev.larixon.com`
-- `stand7.dev.larixon.com`
-- `stand8.dev.larixon.com`
-- `stand9.dev.larixon.com`
-- `stand10.dev.larixon.com`
-- `stand11.dev.larixon.com`
-- `stand12.dev.larixon.com`
-- `stand13.dev.larixon.com`
+- Shared: `stand1.dev.larixon.com` ... `stand13.dev.larixon.com`
 
 Market-specific entries also exist in mobile configs, for example:
 
@@ -80,6 +66,8 @@ Add a smaller-screen device if the task changes dense layouts, tab bars, badges,
   - `./gradlew allureDeviceDebugAndroidTest`
 - iOS simulator example:
   - `xcodebuild test -workspace Larixon.xcworkspace -scheme Bazaraki -destination 'platform=iOS Simulator,name=iPhone 14'`
+- iOS UI tests for specific market:
+  - `xcodebuild test -workspace Larixon.xcworkspace -scheme Somon.tj -destination 'platform=iOS Simulator,name=iPhone 14'`
 
 ### Reporting rule
 

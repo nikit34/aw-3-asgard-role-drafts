@@ -12,11 +12,26 @@ Add these Larixon-specific rules on top of the platform accessibility guidance.
 - Android interactive controls should meet at least `48dp`.
 - iOS interactive controls should meet at least `44pt`.
 - This is especially important for:
-  - star rating controls
-  - hide eye icon
-  - delete/trash icon
-  - chevron-driven profile rows
+  - icon-only buttons (action icons, toggles, hide/show controls)
+  - rating controls
+  - compact list rows with embedded actions
   - tab/filter chips
+
+Android Compose check:
+
+```kotlin
+composeRule.onNodeWithTag("action_icon")
+    .assertHeightIsAtLeast(48.dp)
+    .assertWidthIsAtLeast(48.dp)
+```
+
+iOS check:
+
+```swift
+// Verify minimum 44pt touch target
+let button = app.buttons["hideReview"]
+XCTAssertGreaterThanOrEqual(button.frame.height, 44)
+```
 
 ### Localized text checks
 
