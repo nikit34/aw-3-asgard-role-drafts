@@ -37,28 +37,15 @@ Include market-specific rows when the feature touches locale, currency, or user-
 | Pin | en_TT | TTD | Trinidad |
 | Salanto | EN | EUR | Verify payment currency |
 
-### TD output format
+### Content rules for the 5 mandatory files
 
-**CRITICAL: ASGARD auto-publishes all `.md` files from your output directory to Confluence as one page, concatenated by filename.** Write exactly **one file** named `td.md`. Do NOT create separate `test-strategy.md`, `test-matrix.md`, `risk-map.md`, `coverage-targets.md`, `test-data-strategy.md` — ASGARD will concatenate them into an unreadable page with section headers like "test-strategy.md / --- / risk-map.md".
+The platform requires 5 files in `production-documentation/task-{TASK_KEY}/` (locked slot 050). The following rules define what each file must contain for Larixon web projects. ASGARD publishes these files to Confluence — ensure each file is self-contained and readable.
 
-The single `td.md` must follow the team convention:
+#### `test-strategy.md` — Ссылки + Контекст + Out of scope + Источники
 
-```
-Ссылки
-Контекст
-Риски и приоритеты
-1. {Layer} — {section title}  (test cases)
-2. {Layer} — {section title}  (test cases)
-...
-Out of scope
-Источники
-```
+Must include these sections:
 
-Publish to [TDs 2026](https://larixon.atlassian.net/wiki/spaces/itdep/folder/4091674628). Synced to Allure TestOps web project (`project/1`) via `td-allure-sync`. Publication and generation happen in separate chats (generation consumes most context).
-
-### Section: Ссылки
-
-Numbered table with all references relevant to testing:
+1. **Ссылки** — numbered table of all references:
 
 | # | Описание | Ссылка / Значение |
 | --- | --- | --- |
@@ -66,42 +53,67 @@ Numbered table with all references relevant to testing:
 | 2 | Тип | Bug / Feature (Priority) |
 | 3 | Endpoint(s) | `METHOD /api/path/` |
 | 4 | View / Service | `module/path.py:line — ClassName.method()` |
-| ... | Существующие тесты (до задачи) | `module/tests.py — TestClass` |
+| ... | Существующие тесты | `module/tests.py — TestClass` |
 
-### Section: Контекст
+2. **Контекст** — repo table (`Репозиторий | Роль | Фреймворк | Тестовый стек`), step-by-step architecture with code refs (`module/path.py:line — method()`), data model, key settings
+3. **Out of scope** — explicit bulleted list of exclusions
+4. **Источники** — links to Jira, Confluence, code, existing tests
 
-1. **Репозитории и стеки** table: `Репозиторий | Роль | Фреймворк | Тестовый стек | Сборщик`
-2. **Архитектура** — step-by-step description of the code flow with precise code references (`module/path.py:line — method()`)
-3. **Модель данных** — affected models and fields
-4. **Ключевые настройки** — if applicable
+#### `test-matrix.md` — test cases grouped by layer
 
-### Section: Риски и приоритеты
+NOT a flat table. Each test case is a self-contained block:
+
+```markdown
+### {sequential_number} {title}
+
+{sequential_number}{complete_or_incomplete}
+
+Реализован: {empty in TD — filled by downstream tester}
+
+**Задача:** what this test proves.
+
+**Предусловия:**
+- `user = f.user()` — factory calls with exact values
+
+**Действие:** exact HTTP call or method call.
+
+**Ожидаемый результат:** exact values (HTTP 200; `field == value`; `Model.objects.count() == 1`).
+
+Priority: P0-P2 | Layer: Unit BE / Integration / E2E UI | Type: auto-candidate
+```
+
+Group cases under numbered layer sections:
+```markdown
+## 1. Unit BE — {description}
+## 2. Integration — {endpoint}
+## 3. E2E UI / Smoke
+```
+
+Each section starts with **Цель** and **Кодовая привязка**.
+
+#### `risk-map.md` — Риски и приоритеты
+
+Table with case references:
 
 | Риск | Приоритет | Кейсы |
 | --- | --- | --- |
-| Description of risk | P0-P2 | Reference to test case IDs below (e.g. "Integration 4, 5") |
+| Description of risk | P0-P2 | Integration 4, 5 |
 
-### Sections: Test cases by layer
+#### `test-data-strategy.md` — factories and fixtures
 
-Group test cases under numbered sections by layer. Section title format:
-```
-1. Unit BE — {description of what is tested}
-2. Integration — {endpoint or flow}
-3. E2E UI — {screen or flow}
-4. Smoke
-```
+Use project factory syntax: `f.user()`, `f.rubric(...)`, `f.voucher(active=True, amount=100)`. Include permission matrix (anonymous, owner, non-owner, admin).
 
-Each section starts with a brief **Цель** and **Кодовая привязка**.
+#### `coverage-targets.md` — per-module targets
 
-### Section: Out of scope
+Table: `Module | Class | Risk | Target Lines | Target Branches | Justification`.
 
-Explicit bulleted list of what is NOT tested and why.
+### Reference TDs (study before writing)
 
-### Section: Источники
-
-Links to Jira, Confluence (TD template, TD rules, TD flow, reference TDs), code paths, existing tests.
-
-Reference TDs:
+These TDs follow the team convention:
 - [CD-4253 (bug fix, race condition)](https://larixon.atlassian.net/wiki/spaces/itdep/pages/4316823553)
 - [CD-4680 (feature, multi-endpoint)](https://larixon.atlassian.net/wiki/spaces/itdep/pages/4315578383)
 - [CD-4653 (bug fix, file upload)](https://larixon.atlassian.net/wiki/spaces/itdep/pages/4290707498)
+
+Study these before starting. Your `test-matrix.md` must use the same per-case detail level (Задача/Предусловия/Действие/Ожидаемый) — not a flat matrix table.
+
+TD synced to Allure TestOps web project (`project/1`) via `td-allure-sync`.
