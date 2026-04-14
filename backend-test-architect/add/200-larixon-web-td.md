@@ -39,7 +39,9 @@ Include market-specific rows when the feature touches locale, currency, or user-
 
 ### TD output format
 
-Produce a **single Confluence page** (not multiple files). The page structure must follow the team convention exactly:
+**CRITICAL: ASGARD auto-publishes all `.md` files from your output directory to Confluence as one page, concatenated by filename.** Write exactly **one file** named `td.md`. Do NOT create separate `test-strategy.md`, `test-matrix.md`, `risk-map.md`, `coverage-targets.md`, `test-data-strategy.md` — ASGARD will concatenate them into an unreadable page with section headers like "test-strategy.md / --- / risk-map.md".
+
+The single `td.md` must follow the team convention:
 
 ```
 Ссылки
@@ -53,8 +55,6 @@ Out of scope
 ```
 
 Publish to [TDs 2026](https://larixon.atlassian.net/wiki/spaces/itdep/folder/4091674628). Synced to Allure TestOps web project (`project/1`) via `td-allure-sync`. Publication and generation happen in separate chats (generation consumes most context).
-
-**Do NOT** produce separate files (`test-strategy.md`, `test-matrix.md`, `risk-map.md`, `coverage-targets.md`, `test-data-strategy.md`). All content goes into the single TD page following the sections below.
 
 ### Section: Ссылки
 
