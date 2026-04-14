@@ -1,43 +1,62 @@
-## Test Matrix Design
+## Test Case Format
 
-### Matrix Structure
+### Individual test case structure
 
-Each scenario entry in `test-matrix.md` must have:
+Each test case is a self-contained block inside the layer section. Format:
 
-| Field | Description |
-|-------|-------------|
-| `ID` | Unique identifier: `UT-001`, `UTF-001`, `IT-001`, `E2E-001` |
-| `Level` | `unit-be` / `unit-fe` / `integration` / `e2e` |
-| `Area` | Module, endpoint, component, or flow being tested |
-| `Scenario` | Human-readable description of what is verified |
-| `Priority` | `P1` (must pass before release) / `P2` (should pass) / `P3` (nice to have) |
-| `Test Data` | Input fixture or factory reference |
-| `Expected Result` | Observable outcome |
-| `Assigned To` | `backend-unit-tester` / `frontend-unit-tester` / `backend-integ-tester` / `e2e-tester` |
+```
+### {sequential_number} {title}
 
-### ID Prefix Convention
+{sequential_number}{status: complete or incomplete}
 
-| Prefix | Level | Downstream role |
-|--------|-------|-----------------|
-| `UT-` | unit-be | backend-unit-tester |
-| `UTF-` | unit-fe | frontend-unit-tester |
-| `IT-` | integration | backend-integ-tester |
-| `E2E-` | e2e | e2e-tester |
+Реализован: {TestClass::test_method — filled by downstream tester, leave empty in TD}
 
-### Priority Rules
+**Задача:** what this test proves in one sentence.
 
-- **P1**: All auth/permission checks, all data mutation outcomes, all error codes in api-contract.md, core business logic
-- **P2**: Edge cases, optional fields, pagination boundaries, filter combinations, multi-market variants
-- **P3**: Corner cases with very low probability, cosmetic consistency
+**Предусловия:**
+- bullet list of setup steps with factory calls and exact values
 
-### Coverage Rules
+**Действие:** the exact action (API call, method call, user step).
 
-- Every endpoint in `api-contract.md` → minimum one IT-* scenario
-- Every HIGH-risk area → minimum one E2E-* scenario
-- Every service method → minimum one UT-* scenario
-- Every user-facing component with business logic → minimum one UTF-* scenario
-- No scenario IDs may overlap across levels
+**Ожидаемый результат:** observable outcome with exact values (status codes, field values, DB state).
 
-### Реализован column
+Priority: P0-P2 | Layer: Unit BE / Integration / E2E UI / Smoke | Type: auto-candidate / manual
+```
 
-The `Реализован` column (test class and method name) is filled by the downstream tester after implementation — leave empty in the TD.
+### Rules
+
+- Sequential numbering across all sections (1, 2, 3... not restarting per section)
+- `complete` = test already exists in codebase, `Реализован:` filled with class::method
+- `incomplete` = test not yet implemented, `Реализован:` left empty
+- `Предусловия` must use project factory syntax: `f.user()`, `f.rubric(...)`, `f.voucher(active=True, amount=100)`
+- `Действие` for Integration: exact HTTP method and path (`GET /api/v2/spa/...`)
+- `Действие` for Unit BE: exact method call (`ClassName.method(args)`)
+- `Ожидаемый результат` must include exact values, not "correct" or "as expected"
+- Each test case must have a `Name` column-compatible title for `tester-skills-mcp` parsing
+
+### Priority rules
+
+- **P1**: auth/permission checks, data mutation outcomes, error codes from api-contract, core business logic
+- **P2**: edge cases, optional fields, pagination, filter combinations, multi-market variants
+- **P3**: corner cases with very low probability, cosmetic consistency
+
+### ID conventions
+
+Test cases use sequential numbers (1, 2, 3...) within the single TD page. Layer prefix conventions for downstream reference:
+
+| Prefix | Layer | Downstream role |
+| --- | --- | --- |
+| `UT-` | Unit BE | `backend-unit-tester` |
+| `UTF-` | Unit FE | `frontend-unit-tester` |
+| `IT-` | Integration | `backend-integ-tester` |
+| `E2E-` | E2E UI | `e2e-tester` |
+
+These prefixes are used in downstream guidance comments, not in the TD page itself (TD uses sequential numbers).
+
+### Coverage rules
+
+- Every endpoint in scope → at least one Integration test case
+- Every HIGH-risk area from Риски table → test cases referenced in the Кейсы column
+- Every service method changed → at least one Unit BE test case
+- Backward compatibility section when existing endpoints are modified
+- `Реализован` column filled only by downstream tester after implementation — leave empty in TD
