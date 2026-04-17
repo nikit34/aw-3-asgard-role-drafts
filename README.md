@@ -4,6 +4,7 @@ This directory contains project-specific role additions and overrides prepared f
 
 ### Mobile roles (Android/KMP + iOS)
 
+- `test-architect`
 - `unit-tester`
 - `integ-tester`
 
@@ -59,15 +60,24 @@ The files are organized to mirror the actions requested in the Jira task:
 | `200-larixon-test-devices.md` | add | Environments, devices, TestOps, emulator/simulator baseline |
 | `036-accessibility-tests.md` | extend | Larixon-specific a11y constraints and mobile automation hints |
 
+### Test Architect (mobile)
+
+| Slot | Action | Reason |
+| --- | --- | --- |
+| `020-test-levels.md` | replace | Mobile-specific layer taxonomy (Unit Android / Unit iOS / Unit KMP / Integration Android / Integration iOS / E2E UI / Smoke) |
+| `035-test-matrix.md` | replace | Case-block format with `[ ]`/`[x]` markdown checkboxes and `Реализован:` pytest-like IDs instead of platform flat `T-NNN` matrix |
+| `200-larixon-mobile-td.md` | add | Mobile TD output rules: 5 compact non-overlapping files, Step Zero mobile-scope guard (BLOCK for web-only tasks), anti-patterns from MOB-795/MOB-750 |
+| `070-checklist.md` | extend | Mobile TD checklist including Step Zero guard and platform-specific conventions |
+
 ### Backend Test Architect
 
 | Slot | Action | Reason |
 | --- | --- | --- |
 | `020-test-levels.md` | replace | 4-level model (Unit BE/Unit FE/Integration/E2E) instead of platform 3-level |
-| `035-test-matrix.md` | replace | Aligned priorities P1/P2/P3, added UTF-* prefix for frontend-unit-tester |
+| `035-test-matrix.md` | replace | Case-block format with `[ ]`/`[x]` markdown checkboxes and `Реализован:` pytest IDs; anti-patterns list from MOB-810/MOB-775 |
 | `060-downstream-guidance.md` | extend | Added Frontend Unit Tester guidance template |
-| `200-larixon-web-td.md` | add | TD workflow rules, web infra, tester-skills-mcp integration, markets, environments, output artifacts |
-| `070-checklist.md` | extend | Larixon-specific TD checklist: Confluence publish, Allure sync, role assignments, mcp parsing |
+| `200-larixon-web-td.md` | add | Web TD output rules: 5 compact non-overlapping files, Ссылки/Контекст/Репозитории table, bug-TD Архитектура+Точки поломки pattern, reference TDs |
+| `070-checklist.md` | extend | Larixon-specific TD checklist: case-status markers, `[НЕ РЕАЛИЗОВАНО]`, `Частично покрыт:`, publisher-managed `{toc}` |
 
 ### Backend Unit Tester
 
@@ -232,6 +242,30 @@ Compared all 7 role drafts against actual ASGARD platform slots via API. Fixed:
 - **backend-unit-tester/033**: Added `Model.__new__()` pure-unit technique
 - **e2e-tester/020**: Added multi-user setup, test isolation, file organization
 - **integ-tester/037**: Fixed locale formats to BCP47 (en-US, ru-RU, mn-MN)
+
+## TD output convention (2026-04-17)
+
+Aligned architect roles (`backend-test-architect`, `test-architect`) with the reference Larixon TDs (STM-65/68/101, CD-4653/1319/4017) and tester-skills-mcp rules. Changes:
+
+- **Case format**: markdown checkbox `[ ]` / `[x]` in the heading (after `###`), never after list marker. `[x]` requires `Реализован: test_file::TestClass::test_method` line below.
+- **`Частично покрыт: test_name`** marker for close-but-inexact existing coverage; case stays `[ ]`.
+- **`[НЕ РЕАЛИЗОВАНО]`** plain-text label in heading when production code is blocking.
+- **6 mandatory case fields**: Задача / Предусловия / Действие / Ожидаемый результат / Priority | Layer | Type. Flat `| ID | Scenario | Test Level | ... |` matrix is rejected.
+- **Sequential numbering** across all sections; no `T-`/`UT-`/`IT-`/`E2E-` prefixes, no `17a` suffixes, no gaps.
+- **Layer enum** (web): `Unit BE`, `Unit FE`, `Integration`, `Integration DB`, `Integration Contract`, `E2E`, `E2E UI`, `Smoke`.
+- **Layer enum** (mobile): `Unit Android`, `Unit iOS`, `Unit KMP`, `Integration Android`, `Integration iOS`, `E2E UI Android`, `E2E UI iOS`, `Smoke`.
+- **Risk-map**: compact `Риск | Приоритет | Источник | Кейсы` table (add `Платформа` column for mobile). `Источник` = ТЗ / Побочный эффект / Граничный случай / Регрессия.
+- **5-file output model**: each of the 5 files from locked `050-output-format.md` stays compact and non-overlapping. `test-strategy.md` has no cases; `test-matrix.md` has only cases; risks live in `risk-map.md`; data in `test-data-strategy.md`; coverage in `coverage-targets.md`. Cross-reference via `См. test-strategy.md §Контекст`.
+- **No `Итого` summary table** in `test-matrix.md` (mcp anti-pattern — counts come from publish action).
+- **No agent signatures** (`*Automated by ASGARD*`) or rework narratives (`⚠️ rework v2`) in TD body.
+- **No emoji** in headings; use plain-text labels.
+- **`{toc}` macro and `## {filename}` headers** are managed by the ASGARD publisher; agents must not insert them manually.
+- **Step Zero guard** added to mobile `test-architect`: BLOCK with clear message for web-only tasks, no `НЕПРИМЕНИМО`-style TD body.
+- **6 downstream `013-test-architect-input.md`** slots updated to the new format: plain case numbers, layer-section navigation, case status markers, factory-syntax expectations.
+
+### Added scope: `test-architect/` (mobile)
+
+The mobile `test-architect` platform role previously had no project-specific drafts in this repo. Added 4 slots mirroring `backend-test-architect`: `add/200-larixon-mobile-td.md`, `replace/020-test-levels.md`, `replace/035-test-matrix.md`, `extend/070-checklist.md`.
 
 ## Remaining steps
 

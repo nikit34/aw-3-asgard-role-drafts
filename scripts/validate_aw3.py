@@ -22,7 +22,19 @@ REQUIRED_FILES = [
     "integ-tester/replace/037-multi-market-tests.md",
     "integ-tester/add/200-larixon-test-devices.md",
     "integ-tester/extend/036-accessibility-tests.md",
-    "integ-tester/add/210-playwright-web-tests.md",
+    "test-architect/add/200-larixon-mobile-td.md",
+    "test-architect/replace/020-test-levels.md",
+    "test-architect/replace/035-test-matrix.md",
+    "test-architect/extend/070-checklist.md",
+    "backend-test-architect/add/200-larixon-web-td.md",
+    "backend-test-architect/replace/035-test-matrix.md",
+    "backend-test-architect/extend/070-checklist.md",
+    "backend-unit-tester/add/013-test-architect-input.md",
+    "backend-integ-tester/add/013-test-architect-input.md",
+    "frontend-unit-tester/add/013-test-architect-input.md",
+    "e2e-tester/add/013-test-architect-input.md",
+    "unit-tester/add/013-test-architect-input.md",
+    "integ-tester/add/013-test-architect-input.md",
 ]
 
 COMPLETENESS_HINTS = {
@@ -64,11 +76,90 @@ COMPLETENESS_HINTS = {
         "required": ["disabled", "web", "hybrid", "playwright"],
         "warn": ["repo", "base urls", "allure"],
     },
+    "backend-test-architect/add/200-larixon-web-td.md": {
+        "required": [
+            "5 compact non-overlapping files",
+            "test-strategy.md",
+            "test-matrix.md",
+            "risk-map.md",
+            "test-data-strategy.md",
+            "coverage-targets.md",
+            "[ ]",
+            "[x]",
+            "реализован",
+            "частично покрыт",
+            "не реализовано",
+        ],
+        "warn": ["cd-4653", "cd-4017", "stm-68", "stm-65", "stm-101", "cd-1319"],
+    },
+    "backend-test-architect/replace/035-test-matrix.md": {
+        "required": [
+            "[ ]",
+            "[x]",
+            "задача",
+            "предусловия",
+            "действие",
+            "ожидаемый результат",
+            "priority",
+            "layer",
+            "type",
+            "sequential numbering",
+        ],
+        "warn": ["частично покрыт", "не реализовано"],
+    },
+    "backend-test-architect/extend/070-checklist.md": {
+        "required": ["[ ]", "реализован", "частично покрыт", "не реализовано", "factory"],
+        "warn": ["итого", "emoji"],
+    },
+    "test-architect/add/200-larixon-mobile-td.md": {
+        "required": [
+            "5 compact non-overlapping files",
+            "step zero",
+            "block",
+            "kotlin",
+            "swift",
+            "kmp",
+            "[ ]",
+            "реализован",
+        ],
+        "warn": ["не реализовано", "частично покрыт", "bz", "tj", "mn"],
+    },
+    "test-architect/replace/035-test-matrix.md": {
+        "required": [
+            "[ ]",
+            "[x]",
+            "задача",
+            "предусловия",
+            "unit android",
+            "unit ios",
+            "unit kmp",
+            "integration android",
+            "integration ios",
+        ],
+        "warn": ["частично покрыт", "не реализовано"],
+    },
+    "test-architect/replace/020-test-levels.md": {
+        "required": ["unit android", "unit ios", "unit kmp", "integration android", "integration ios", "kover", "xccov"],
+        "warn": ["bamboo"],
+    },
+    "test-architect/extend/070-checklist.md": {
+        "required": ["step zero", "block", "[ ]", "реализован", "не реализовано"],
+        "warn": ["manual-tester"],
+    },
 }
 
 ALLOWED_PLAYWRIGHT_FILES = {
     "README.md",
     "integ-tester/add/210-playwright-web-tests.md",
+    # Playwright IS the web E2E framework for Larixon — valid in web roles:
+    "backend-test-architect/add/200-larixon-web-td.md",
+    "backend-test-architect/replace/020-test-levels.md",
+    "backend-test-architect/replace/035-test-matrix.md",
+    "e2e-tester/add/011-test-style.md",
+    "e2e-tester/add/013-test-architect-input.md",
+    "e2e-tester/add/200-larixon-web-e2e-infra.md",
+    "e2e-tester/extend/031-external-services.md",
+    "e2e-tester/replace/020-e2e-infrastructure.md",
 }
 ALLOWED_BROWSERSTACK_FILES = {
     "README.md",
